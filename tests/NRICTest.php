@@ -63,7 +63,7 @@ class NRICTest extends TestCase
                 \implode('-', $nric),
                 $nric[1],
                 $nric[2],
-                $nric
+                $nric,
             ];
         }
 

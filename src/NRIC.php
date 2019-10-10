@@ -4,7 +4,6 @@ namespace Malaysia\Identification;
 
 use Carbon\CarbonImmutable;
 use Carbon\CarbonInterface;
-use DateTimeInterface;
 
 class NRIC
 {
@@ -45,7 +44,6 @@ class NRIC
             }
         }
     }
-
 
     /**
      * Construct a new NRIC value object.
@@ -158,7 +156,8 @@ class NRIC
     /**
      * Format birth date from NRIC.
      *
-     * @param  string $birthDate
+     * @param string $birthDate
+     *
      * @return \Carbon\CarbonInterface|null
      */
     protected function formatBirthDate(string $birthDate): ?CarbonInterface
