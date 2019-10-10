@@ -14,13 +14,14 @@ class Nric
 
     public function __construct(string $nricNumber)
     {
-        if (! \preg_match('/^(\d{2}[0-1][0-9][0-3][0-9])-?(\d{2})-?(\d{4})/', $nricNumber, $matches)) {
-            throw new \InvalidArgumentException('Not a valid NRIC number');
-        }
+        if (\preg_match('/^(\d{2}[0-1][0-9][0-3][0-9])-?(\d{2})-?(\d{4})/', $nricNumber, $matches)) {
+            $this->birthDate = $this->formatBirthDate($matches[1]);
 
-        $this->birthDate = $this->formatBirthDate($matches[1]);
-        $this->placeOfBirthCode = $matches[2];
-        $this->genderCode = $matches[3];
+            if ($this->birthDate instanceof CarbonInterface) {
+                $this->placeOfBirthCode = $matches[2];
+                $this->genderCode = $matches[3];
+            }
+        }
     }
 
     public static function given(string $nricNumber)
@@ -52,11 +53,11 @@ class Nric
 
     public function toArray(): array
     {
-        return [
+        return $this->isValid() ? [
             $this->birthDate->format('ymd'),
             $this->placeOfBirthCode,
             $this->genderCode,
-        ];
+        ] : [];
     }
 
     public function format(string $separator = ''): string

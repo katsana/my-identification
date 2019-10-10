@@ -12,7 +12,7 @@ class NricTest extends TestCase
      * @test
      * @dataProvider validNricDataProvider
      */
-    public function it_can_initiate_valid_identification_numbers($given, $formatted, $placeOfBirthCode, $genderCode)
+    public function it_can_initiate_valid_identification_numbers($given, $formatted, $placeOfBirthCode, $genderCode, $asArray)
     {
         $nric = Nric::given($given);
 
@@ -22,6 +22,24 @@ class NricTest extends TestCase
         $this->assertInstanceOf(CarbonInterface::class, $nric->birthDate());
         $this->assertSame($placeOfBirthCode, $nric->placeOfBirthCode());
         $this->assertSame($genderCode, $nric->genderCode());
+        $this->assertSame($asArray, $nric->toArray());
+    }
+
+    /**
+     * @test
+     * @dataProvider invalidNricDataProvider
+     */
+    public function it_can_initiate_invalid_identification_numbers($given, $formatted)
+    {
+        $nric = Nric::given($given);
+
+        $this->assertFalse($nric->isValid());
+        $this->assertSame('', $nric->toFormattedString());
+        $this->assertSame('', (string) $nric);
+        $this->assertNull($nric->birthDate());
+        $this->assertNull($nric->placeOfBirthCode());
+        $this->assertNull($nric->genderCode());
+        $this->assertSame([], $nric->toArray());
     }
 
     /**
@@ -31,12 +49,13 @@ class NricTest extends TestCase
      */
     public function validNricDataProvider()
     {
-        $data = [];
         $nrics = [
             ['810102', '08', '1110'],
             ['811231', '08', '1110'],
             ['120228', '08', '1110'], // Leap year
         ];
+
+        $data = [];
 
         foreach ($nrics as $nric) {
             $data[] = [
@@ -44,6 +63,32 @@ class NricTest extends TestCase
                 \implode('-', $nric),
                 $nric[1],
                 $nric[2],
+                $nric
+            ];
+        }
+
+        return $data;
+    }
+
+    /**
+     * Invalid NRIC data provider.
+     *
+     * @return array
+     */
+    public function invalidNricDataProvider()
+    {
+        $nrics = [
+            ['811402', '08', '1110'],
+            ['811231', 'aa', '1110'],
+            ['120228', '08', 'aaaa'],
+        ];
+
+        $data = [];
+
+        foreach ($nrics as $nric) {
+            $data[] = [
+                \implode('', $nric),
+                \implode('-', $nric),
             ];
         }
 
