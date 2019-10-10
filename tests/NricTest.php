@@ -1,9 +1,9 @@
 <?php
 
-namespace Nric\Tests;
+namespace Malaysia\Identification\Tests;
 
 use Carbon\CarbonInterface;
-use Nric\Nric;
+use Malaysia\Identification\Nric;
 use PHPUnit\Framework\TestCase;
 
 class NricTest extends TestCase

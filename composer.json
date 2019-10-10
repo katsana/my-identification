@@ -1,6 +1,6 @@
 {
-    "name": "katsana/nric",
-    "description": "NRIC Value Object for PHP",
+    "name": "katsana/my-identification",
+    "description": "Identification (Malaysia) Value Object for PHP",
     "type": "library",
     "license": "MIT",
     "authors": [
@@ -11,12 +11,12 @@
     ],
     "autoload": {
         "psr-4": {
-            "Nric\\": "src/"
+            "Malaysia\\Identification\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Nric\\Tests\\": "tests/"
+            "Malaysia\\Identification\\Tests\\": "tests/"
         }
     },
     "require": {

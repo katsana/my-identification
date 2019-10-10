@@ -1,6 +1,6 @@
 <?php
 
-namespace Nric;
+namespace Malaysia\Identification;
 
 use Carbon\CarbonImmutable;
 use Carbon\CarbonInterface;
