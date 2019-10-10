@@ -1,0 +1,31 @@
+{
+    "name": "katsana/nric",
+    "description": "NRIC Value Object for PHP",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "KATSANA Developer",
+            "email": "developer@katsana.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Nric\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Nric\\Tests\\": "tests/"
+        }
+    },
+    "require": {
+        "php": ">=7.1",
+        "nesbot/carbon": "^2.0"
+    },
+    "require-dev": {
+        "mockery/mockery": "^1.2.3",
+        "phpunit/phpunit": "^8.3"
+    },
+    "minimum-stability": "stable"
+}
