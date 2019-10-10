@@ -3,10 +3,10 @@
 namespace Malaysia\Identification\Tests;
 
 use Carbon\CarbonInterface;
-use Malaysia\Identification\NricNumber as NRIC;
+use Malaysia\Identification\NRIC;
 use PHPUnit\Framework\TestCase;
 
-class NricNumberTest extends TestCase
+class NRICTest extends TestCase
 {
     /**
      * @test

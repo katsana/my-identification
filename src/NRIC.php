@@ -6,7 +6,7 @@ use Carbon\CarbonImmutable;
 use Carbon\CarbonInterface;
 use DateTimeInterface;
 
-class NricNumber
+class NRIC
 {
     /**
      * Birthdate.
