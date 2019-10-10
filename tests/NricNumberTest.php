@@ -3,10 +3,10 @@
 namespace Malaysia\Identification\Tests;
 
 use Carbon\CarbonInterface;
-use Malaysia\Identification\Nric;
+use Malaysia\Identification\NricNumber as NRIC;
 use PHPUnit\Framework\TestCase;
 
-class NricTest extends TestCase
+class NricNumberTest extends TestCase
 {
     /**
      * @test
@@ -14,7 +14,7 @@ class NricTest extends TestCase
      */
     public function it_can_initiate_valid_identification_numbers($given, $formatted, $placeOfBirthCode, $genderCode, $asArray)
     {
-        $nric = Nric::given($given);
+        $nric = NRIC::given($given);
 
         $this->assertTrue($nric->isValid());
         $this->assertSame($formatted, $nric->toFormattedString());
@@ -31,7 +31,7 @@ class NricTest extends TestCase
      */
     public function it_can_initiate_invalid_identification_numbers($given, $formatted)
     {
-        $nric = Nric::given($given);
+        $nric = NRIC::given($given);
 
         $this->assertFalse($nric->isValid());
         $this->assertSame('', $nric->toFormattedString());
