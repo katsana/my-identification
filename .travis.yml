@@ -8,9 +8,9 @@ php:
 
 env:
   global:
-    - setup=basic
     - coverage=no
   matrix:
+    - setup=basic
     - setup=stable
     - setup=lowest
 
