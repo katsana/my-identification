@@ -35,13 +35,15 @@ class NRIC
      */
     public function __construct(string $nricNumber)
     {
-        if (\preg_match('/^(\d{2}[0-1][0-9][0-3][0-9])-?(\d{2})-?(\d{4})/', $nricNumber, $matches)) {
-            $this->birthDate = $this->formatBirthDate($matches[1]);
+        if (! \preg_match('/^(\d{2}[0-1][0-9][0-3][0-9])-?(\d{2})-?(\d{4})/', $nricNumber, $matches)) {
+            return ;
+        }
 
-            if ($this->birthDate instanceof CarbonInterface) {
-                $this->placeOfBirthCode = $matches[2];
-                $this->genderCode = $matches[3];
-            }
+        $this->birthDate = $this->formatBirthDate($matches[1]);
+
+        if ($this->birthDate instanceof CarbonInterface) {
+            $this->placeOfBirthCode = $matches[2];
+            $this->genderCode = $matches[3];
         }
     }
 
