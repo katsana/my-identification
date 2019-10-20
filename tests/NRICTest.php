@@ -94,4 +94,31 @@ class NRICTest extends TestCase
 
         return $data;
     }
+
+    /** @test */
+    public function it_can_serialize_nric()
+    {
+        $nric = NRIC::given('810102081110');
+
+        $this->assertSame(
+            'C:28:"Malaysia\Identification\NRIC":97:{a:3:{s:9:"birthDate";s:6:"810102";s:16:"placeOfBirthCode";s:2:"08";s:10:"genderCode";s:4:"1110";}}',
+            \serialize($nric)
+        );
+    }
+
+    /** @test */
+    public function it_can_unserialize_nric()
+    {
+        $nric = \unserialize(
+            'C:28:"Malaysia\Identification\NRIC":97:{a:3:{s:9:"birthDate";s:6:"810102";s:16:"placeOfBirthCode";s:2:"08";s:10:"genderCode";s:4:"1110";}}'
+        );
+
+        $this->assertTrue($nric->isValid());
+        $this->assertSame('810102-08-1110', $nric->toFormattedString());
+        $this->assertSame('810102081110', (string) $nric);
+        $this->assertInstanceOf(CarbonInterface::class, $nric->birthDate());
+        $this->assertSame('08', $nric->placeOfBirthCode());
+        $this->assertSame('1110', $nric->genderCode());
+        $this->assertSame(['810102', '08', '1110'], $nric->toArray());
+    }
 }

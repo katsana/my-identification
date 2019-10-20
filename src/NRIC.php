@@ -4,8 +4,9 @@ namespace Malaysia\Identification;
 
 use Carbon\CarbonImmutable;
 use Carbon\CarbonInterface;
+use Serializable;
 
-class NRIC
+class NRIC implements Serializable
 {
     /**
      * Birthdate.
@@ -174,5 +175,33 @@ class NRIC
         );
 
         return $birthDate === $date->format('ymd') ? $date : null;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function serialize()
+    {
+        $data = $this->toArray();
+
+        return \serialize([
+            'birthDate' => $data[0] ?? null,
+            'placeOfBirthCode' => $data[1] ?? null,
+            'genderCode' => $data[2] ?? null,
+        ]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function unserialize($data)
+    {
+        [
+            'birthDate' => $birthDate,
+            'placeOfBirthCode' => $this->placeOfBirthCode,
+            'genderCode' => $this->genderCode,
+        ] = \unserialize($data);
+
+        $this->birthDate = CarbonImmutable::createFromFormat('ymd', $birthDate);
     }
 }
