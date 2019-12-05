@@ -31,13 +31,11 @@ class NRIC implements Serializable
 
     /**
      * Construct a new NRIC value object.
-     *
-     * @param string $nricNumber
      */
     public function __construct(string $nricNumber)
     {
         if (! \preg_match('/^(\d{2}[0-1][0-9][0-3][0-9])-?(\d{2})-?(\d{4})/', $nricNumber, $matches)) {
-            return ;
+            return;
         }
 
         $this->birthDate = $this->formatBirthDate($matches[1]);
@@ -51,8 +49,6 @@ class NRIC implements Serializable
     /**
      * Construct a new NRIC value object.
      *
-     * @param string $nricNumber
-     *
      * @return static
      */
     public static function given(string $nricNumber)
@@ -62,8 +58,6 @@ class NRIC implements Serializable
 
     /**
      * Validate if current NRIC is valid.
-     *
-     * @return bool
      */
     public function isValid(): bool
     {
@@ -74,8 +68,6 @@ class NRIC implements Serializable
 
     /**
      * Get birthdate value.
-     *
-     * @return \Carbon\CarbonInterface|null
      */
     public function birthDate(): ?CarbonInterface
     {
@@ -84,8 +76,6 @@ class NRIC implements Serializable
 
     /**
      * Get place of birthdate code value.
-     *
-     * @return string|null
      */
     public function placeOfBirthCode(): ?string
     {
@@ -94,8 +84,6 @@ class NRIC implements Serializable
 
     /**
      * Get gender code value.
-     *
-     * @return string|null
      */
     public function genderCode(): ?string
     {
@@ -104,8 +92,6 @@ class NRIC implements Serializable
 
     /**
      * Convert to an array.
-     *
-     * @return array
      */
     public function toArray(): array
     {
@@ -118,8 +104,6 @@ class NRIC implements Serializable
 
     /**
      * Format NRIC as string.
-     *
-     * @return string
      */
     public function format(string $separator = ''): string
     {
@@ -128,8 +112,6 @@ class NRIC implements Serializable
 
     /**
      * Convert NRIC to formatted string format.
-     *
-     * @return string
      */
     public function toFormattedString(): string
     {
@@ -138,8 +120,6 @@ class NRIC implements Serializable
 
     /**
      * Convert NRIC to standard string format.
-     *
-     * @return string
      */
     public function toStandardString(): string
     {
@@ -148,8 +128,6 @@ class NRIC implements Serializable
 
     /**
      * Convert NRIC to string.
-     *
-     * @return string
      */
     public function __toString(): string
     {
@@ -158,10 +136,6 @@ class NRIC implements Serializable
 
     /**
      * Format birth date from NRIC.
-     *
-     * @param string $birthDate
-     *
-     * @return \Carbon\CarbonInterface|null
      */
     protected function formatBirthDate(string $birthDate): ?CarbonInterface
     {
