@@ -9,6 +9,11 @@ use Serializable;
 class NRIC implements Serializable
 {
     /**
+     * NRIC regular expression pattern.
+     */
+    public const REGEX = '/^(\d{2}[0-1][0-9][0-3][0-9])-?(\d{2})-?(\d{4})/';
+
+    /**
      * Birthdate.
      *
      * @var \Carbon\CarbonInterface|null
@@ -34,7 +39,7 @@ class NRIC implements Serializable
      */
     public function __construct(string $nricNumber)
     {
-        if (! \preg_match('/^(\d{2}[0-1][0-9][0-3][0-9])-?(\d{2})-?(\d{4})/', $nricNumber, $matches)) {
+        if (! \preg_match(self::REGEX, $nricNumber, $matches)) {
             return;
         }
 
