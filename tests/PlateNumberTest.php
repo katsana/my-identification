@@ -12,9 +12,11 @@ class PlateNumberTest extends TestCase
      * @test
      * @dataProvider validPlateNumberDataProvider
      */
-    public function it_can_initiate_valid_identification_numbers($given, $prefix, $number, $suffix, $asArray)
+    public function it_can_initiate_valid_identification_numbers($given, $formatted, $prefix, $number, $suffix, $asArray)
     {
         $plate = PlateNumber::given($given);
+
+        $this->assertTrue(PlateNumber::given($formatted)->isValid());
 
         $this->assertTrue($plate->isValid());
         $this->assertSame($given, (string) $plate);
@@ -50,6 +52,18 @@ class PlateNumberTest extends TestCase
     {
         $plateNumbers = [
             ['RIMAU', '1437'],
+            ['WXG', '5633'],
+            ['BAMBEE', '5633'],
+            ['WA', '605', 'S'],
+            ['WB', '1234', 'A'],
+            ['U', '1234'],
+            ['PUTRAJAYA', '1234'],
+            ['PROTON', '1234'],
+            ['A1M', '1234'],
+            ['G1M', '1234'],
+            ['K1M', '1234'],
+            ['T1M', '1234'],
+            ['1M4U', '1234'],
         ];
 
         $data = [];
@@ -57,6 +71,7 @@ class PlateNumberTest extends TestCase
         foreach ($plateNumbers as $plateNumber) {
             yield [
                 \implode('', $plateNumber),
+                \implode(' ', $plateNumber),
                 $plateNumber[0],
                 $plateNumber[1],
                 $plateNumber[2] ?? null,
