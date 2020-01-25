@@ -55,10 +55,8 @@ class NRICTest extends TestCase
             ['120228', '08', '1110'], // Leap year
         ];
 
-        $data = [];
-
         foreach ($nrics as $nric) {
-            $data[] = [
+            yield [
                 \implode('', $nric),
                 \implode('-', $nric),
                 $nric[1],
@@ -66,8 +64,6 @@ class NRICTest extends TestCase
                 $nric,
             ];
         }
-
-        return $data;
     }
 
     /**
@@ -83,16 +79,12 @@ class NRICTest extends TestCase
             ['120228', '08', 'aaaa'],
         ];
 
-        $data = [];
-
         foreach ($nrics as $nric) {
-            $data[] = [
+            yield [
                 \implode('', $nric),
                 \implode('-', $nric),
             ];
         }
-
-        return $data;
     }
 
     /** @test */
