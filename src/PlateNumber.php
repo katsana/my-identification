@@ -41,9 +41,9 @@ class PlateNumber implements Serializable
             return;
         }
 
-        $this->platePrefix = $matches[1];
+        $this->platePrefix = \strtoupper($matches[1]);
         $this->plateNumber = $matches[2];
-        $this->plateSuffix = $matches[3] ?? null;
+        $this->plateSuffix = isset($matches[3]) ? \strtoupper($matches[3]) : null;
     }
 
     /**
