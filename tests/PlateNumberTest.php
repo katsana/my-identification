@@ -2,7 +2,6 @@
 
 namespace Malaysia\Identification\Tests;
 
-use Carbon\CarbonInterface;
 use Malaysia\Identification\PlateNumber;
 use PHPUnit\Framework\TestCase;
 
