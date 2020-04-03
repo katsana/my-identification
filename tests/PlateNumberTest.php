@@ -36,9 +36,6 @@ class PlateNumberTest extends TestCase
         $this->assertFalse($plate->isValid());
         $this->assertSame('', $plate->toFormattedString());
         $this->assertSame('', (string) $plate);
-        $this->assertNull($plate->prefix());
-        $this->assertNull($plate->number());
-        $this->assertNull($plate->suffix());
         $this->assertSame([], $plate->toArray());
     }
 
@@ -58,10 +55,15 @@ class PlateNumberTest extends TestCase
             ['U', '1234'],
             ['PUTRAJAYA', '1234'],
             ['PROTON', '1234'],
-            ['A1M', '1234'],
+            ['A1M', '1000'],
             ['G1M', '1234'],
-            ['K1M', '1234'],
-            ['T1M', '1234'],
+            ['K1M', '1'],
+            ['K1M', '100'],
+            ['PERFECT', '1'],
+            ['PERFECT', '100'],
+            ['T1M', '1000'],
+            ['UP', '1'],
+            ['UP', '999'],
             ['1M4U', '1234'],
         ];
 
@@ -87,6 +89,13 @@ class PlateNumberTest extends TestCase
     public function invalidPlateNumberDataProvider()
     {
         $plateNumbers = [
+            ['A1M', '1001'],
+            ['G', '1000', 'G'],
+            ['K1M', '101'],
+            ['PERFECT', '101'],
+            ['T1M', '1001'],
+            ['UP', '1000'],
+            ['US', '1001'],
             ['R1MAU', '1437'],
         ];
 

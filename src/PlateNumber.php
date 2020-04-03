@@ -4,6 +4,9 @@ namespace Malaysia\Identification;
 
 use Serializable;
 
+/**
+ * @see https://en.wikipedia.org/wiki/Vehicle_registration_plates_of_Malaysia
+ */
 class PlateNumber implements Serializable
 {
     /**
@@ -61,7 +64,27 @@ class PlateNumber implements Serializable
      */
     public function isValid(): bool
     {
-        return ! \is_null($this->platePrefix) && ! \is_null($this->plateNumber);
+        if (\is_null($this->platePrefix) || \is_null($this->plateNumber)) {
+            return false;
+        }
+
+        // Plate number 1-1000 series
+        if ($this->plateNumber > 1000) {
+            return ! \in_array($this->platePrefix, ['A1M', 'T1M', 'US']);
+        }
+
+        // Plate number 1-999 series
+        if ($this->plateNumber > 999) {
+            return ! \in_array($this->platePrefix, ['UP'])
+                && ! ($this->platePrefix === 'G' && $this->plateSuffix === 'G');
+        }
+
+        // Plate number 1-100 series
+        if ($this->plateNumber > 100 && \in_array($this->platePrefix, ['K1M', 'PERFECT'])) {
+            return false;
+        }
+
+        return true;
     }
 
     /**
