@@ -70,7 +70,7 @@ class PlateNumber implements Serializable
 
         // Plate number 1-1000 series
         if ($this->plateNumber > 1000) {
-            return ! \in_array($this->platePrefix, ['A1M', 'T1M', 'US']);
+            return ! \in_array($this->platePrefix, ['A1M', 'GTR', 'T1M', 'US']);
         }
 
         // Plate number 1-999 series
