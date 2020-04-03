@@ -9,7 +9,7 @@ Identification (Malaysia) Value Object for PHP
 
 ## Installation
 
-Minions can be installed via composer:
+Identification can be installed via composer:
 
 ```
 composer require "katsana/my-identification"
